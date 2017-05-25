@@ -1,0 +1,8 @@
+.idea
+*.iml
+web.config
+node_modules
+.out
+.temp
+.tmp
+Thumbs.db
