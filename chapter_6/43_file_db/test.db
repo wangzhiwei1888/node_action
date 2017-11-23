@@ -1,0 +1,8 @@
+{"key":"foo","value":"foo value"}
+{"key":"bar","value":"bar value"}
+{"key":"foo","value":"foo value"}
+{"key":"bar","value":"bar value"}
+{"key":"bar","value":null}
+{"key":"foo","value":"foo value"}
+{"key":"bar","value":"bar value"}
+{"key":"bar","value":null}

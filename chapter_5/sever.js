@@ -5,7 +5,7 @@ const path = require('path');
 
 http.createServer(function (req, res) {
     let testFile = path.join(__dirname, 'index.html');
-    // fs.readFile(testFile, function (err, data) {
+    // FS.readFile(testFile, function (err, data) {
     //     if(err){
     //         res.statusCode = 500;
     //         res.end(err.toString())
