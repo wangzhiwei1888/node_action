@@ -1,7 +1,7 @@
 .idea
 *.iml
 web.config
-node_modules
+websocket/node_modules
 .out
 .temp
 .tmp

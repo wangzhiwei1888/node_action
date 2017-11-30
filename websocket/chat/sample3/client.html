@@ -1,0 +1,58 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Simple Chat</title>
+</head>
+<body>
+<h1>Chat Room</h1>
+<input type="text" id="input"/>
+<input type="button" value="发送" id="btn">
+
+<script src="../../common/socket.io.js"></script>
+<script>
+window.onload = function () {
+    let btn = document.querySelector("#btn");
+    let input = document.querySelector("#input");
+    let socket = io('ws://127.0.0.1:8001');
+
+    btn.onclick = () => {
+        let value = input.value;
+        if (value) {
+            socket.emit("message",value)
+        }
+    };
+
+    socket.on("enter", (data) => {
+        showMessage({type: "enter", data: data})
+    });
+
+    socket.on("message", (data) => {
+        showMessage({type: "message", data: data})
+    });
+
+    socket.on("left", (data) => {
+        showMessage({type: "left", data: data})
+    });
+
+    function showMessage(data) {
+        let type = data.type;
+        let message = data.data;
+        let div = document.createElement('div');
+        div.innerHTML = message;
+        if (type == "enter") {
+            div.style.color = "green";
+        }
+        if (type == "left") {
+            div.style.color = "red";
+        }
+        if (type == "message") {
+            div.style.color = "#999";
+        }
+        document.body.appendChild(div);
+    }
+}
+</script>
+</body>
+</html>
