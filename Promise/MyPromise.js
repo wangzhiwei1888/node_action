@@ -70,7 +70,7 @@
         }
 
         _doFn(fn) {
-            console.log(`${this.id}：_doFn`);
+            MyPromise.log && console.log(`${this.id}：_doFn`);
             let done = false;
             try {
                 fn(value => {
@@ -91,7 +91,7 @@
         }
 
         _resolveListener(value) {
-            console.log(`${this.id}：_resolveListener`);
+            MyPromise.log && console.log(`${this.id}：_resolveListener`);
             try {
                 if (value && (typeof value === 'object' || typeof value === 'function')) {
                     let then = value.then;
@@ -116,7 +116,7 @@
         }
 
         _finale() {
-            console.log(`${this.id}：_finale`);
+            MyPromise.log && console.log(`${this.id}：_finale`);
             for (let i = 0, len = this._deferreds.length; i < len; i++) {
                 this._handle(this._deferreds[i])
             }
@@ -124,7 +124,7 @@
         }
 
         _handle(deferred) {
-            console.log(`${this.id}：_handle`);
+            MyPromise.log && console.log(`${this.id}：_handle`);
             if (this._state === null) {
                 this._deferreds.push(deferred);
                 return;
@@ -157,7 +157,7 @@
         }
 
         then(onFulfilled, onRejected) {
-            console.log(`${this.id}：then`);
+            MyPromise.log && console.log(`${this.id}：then`);
             return new MyPromise((resolve, reject) => {
                 this._handle(new Deferred(onFulfilled, onRejected, resolve, reject));
             });
@@ -235,6 +235,7 @@
     }
 
     MyPromise.id = 0;
+    MyPromise.log = false;
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = MyPromise;
