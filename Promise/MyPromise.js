@@ -191,24 +191,33 @@
             });
         };
 
+        static race() {
+            let args = Array.from(arguments.length === 1 && Array.isArray(arguments[0]) ? arguments[0] : arguments);
+            return new MyPromise((resolve, reject) => {
+                for (let i = 0, len = args.length; i < len; i++) {
+                    if (args[i] instanceof MyPromise) {
+                        args[i].then(resolve, reject);
+                    }
+                    else {
+                        MyPromise.resolve(args[i]).then(resolve, reject);
+                    }
+                }
+            });
+        };
+
         static all() {
-            let args = Array.prototype.slice.call(arguments.length === 1 && Array.isArray(arguments[0]) ? arguments[0] : arguments);
+            let args = Array.from(arguments.length === 1 && Array.isArray(arguments[0]) ? arguments[0] : arguments);
             return new MyPromise((resolve, reject) => {
                 if (args.length === 0) return resolve([]);
                 let remaining = args.length;
 
-                function res(i, val) {
+                function res(index, value) {
                     try {
-                        if (val && (typeof val === 'object' || typeof val === 'function')) {
-                            let then = val.then;
-                            if (typeof then === 'function') {
-                                then.call(val, function (val) {
-                                    res(i, val)
-                                }, reject);
-                                return;
-                            }
+                        if (value instanceof MyPromise) {
+                            value.then(v => res(index, v), reject);
+                            return;
                         }
-                        args[i] = val;
+                        args[index] = value;
                         if (--remaining === 0) {
                             resolve(args);
                         }
@@ -224,14 +233,6 @@
             });
         };
 
-        static race(values) {
-            return new MyPromise((resolve, reject) => {
-                for (let i = 0, len = values.length; i < len; i++) {
-                    values[i].then(resolve, reject);
-                }
-            });
-        };
-
     }
 
     MyPromise.id = 0;
@@ -239,7 +240,8 @@
 
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = MyPromise;
-    } else {
+    }
+    else {
         window.MyPromise = MyPromise;
     }
 
