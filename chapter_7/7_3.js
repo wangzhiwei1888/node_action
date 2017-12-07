@@ -12,7 +12,7 @@ let server = net.createServer(client => {
 
     client.on("data", data => {
         process.stdout.write("you receive from client :" + data.toString());
-        client.write("you send to server :" + data.toString());
+        client.write("you _send to server :" + data.toString());
     })
 });
 

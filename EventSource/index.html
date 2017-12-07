@@ -1,0 +1,50 @@
+<div style="width: 46%; display: inline-block; vertical-align: top">
+    <h1>onmessage</h1>
+    <div id="message">
+
+    </div>
+</div>
+
+<div style="width: 46%; display: inline-block">
+    <h1>ontime</h1>
+    <div id="time">
+
+    </div>
+</div>
+
+
+<script>
+function onTime(e) {
+    let container = document.querySelector("#time");
+    if (container.childElementCount >= 15) {
+        container.innerHTML = '';
+    }
+    let contentNode = document.createElement('p');
+    contentNode.innerHTML = e.data;
+    container.appendChild(contentNode);
+}
+
+function onMessage(e) {
+    let container = document.querySelector("#message");
+    if (container.childElementCount >= 15) {
+        container.innerHTML = '';
+    }
+    let contentNode = document.createElement('p');
+    contentNode.innerHTML = e.data;
+    container.appendChild(contentNode);
+}
+
+let es = new EventSource("http://localhost:9876");
+es.id = 0;
+es.onopen = () => {
+    es.id++;
+    console.log("es id:", es.id, " -- es is open");
+};
+es.onerror = error => {
+    console.log(error)
+};
+
+es.addEventListener("time", onTime);
+es.addEventListener("message", onMessage);
+
+</script>
