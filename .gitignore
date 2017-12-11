@@ -6,3 +6,4 @@ websocket/node_modules
 .temp
 .tmp
 Thumbs.db
+node_modules/

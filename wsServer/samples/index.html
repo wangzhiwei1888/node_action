@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Simple websocket secure test</title>
+    <script>
+    window.onload = () => {
+        let ws = new WebSocket("ws://127.0.0.1:8001");
+
+        let container = document.querySelector("#container");
+        let txt = document.querySelector("#send-txt");
+        let btn = document.querySelector("#send-btn");
+
+        function addContent(txt) {
+            let p = document.createElement('p');
+            p.innerHTML = txt;
+            container.appendChild(p);
+        }
+
+        ws.onopen = function () {
+            addContent("Connection opened");
+            btn.onclick = () => {
+                let value = txt.value;
+                ws.send(value);
+            }
+        };
+        ws.onclose = function () {
+            addContent("Connection closed")
+        };
+        ws.onmessage = function (evt) {
+            addContent("Received: "+evt.data);
+        };
+        ws.onerror = function () {
+            addContent("Error")
+        }
+    }
+    </script>
+</head>
+
+<body>
+<textarea rows="3" cols="50" id="send-txt"></textarea>
+<button id="send-btn">发送</button>
+<div id="container" style="margin-top: 20px; border: 1px solid #999;">
+
+</div>
+</body>
+</html>

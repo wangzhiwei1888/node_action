@@ -5,7 +5,7 @@ var pubsub = {};
     var topics = {};
     // An topic identifier
     var subUid = -1;
-    // Publish or broadcast events of interest
+    // Publish or broadcast EventEmitter of interest
     // with a specific topic name and arguments
     // such as the data to pass along
     myObject.publish = function( topic, args ) {
@@ -19,7 +19,7 @@ var pubsub = {};
         }
         return this;
     };
-    // Subscribe to events of interest
+    // Subscribe to EventEmitter of interest
     // with a specific topic name and a
     // callback function, to be executed
     // when the topic/event is observed
