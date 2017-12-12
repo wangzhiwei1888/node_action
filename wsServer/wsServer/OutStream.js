@@ -2,9 +2,9 @@
  * @file Simple wrapper for stream.Writable, used for sending binary data
  */
 
-var util = require('util'),
-    stream = require('stream'),
-    frame = require('./frame')
+const util = require('util');
+const stream = require('stream');
+const frame = require('./frame.js');
 
 /**
  * @class Represents the writable stream for binary frames

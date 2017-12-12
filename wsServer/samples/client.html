@@ -18,7 +18,7 @@
         }
 
         ws.onopen = function () {
-            addContent("Connection opened");
+            addContent("Connection opened log in client");
             btn.onclick = () => {
                 let value = txt.value;
                 ws.send(value);
@@ -28,7 +28,7 @@
             addContent("Connection closed")
         };
         ws.onmessage = function (evt) {
-            addContent("Received: "+evt.data);
+            addContent("Received from server :  "+evt.data);
         };
         ws.onerror = function () {
             addContent("Error")
@@ -38,7 +38,7 @@
 </head>
 
 <body>
-<textarea rows="3" cols="50" id="send-txt"></textarea>
+<textarea rows="3" cols="50" id="send-txt" style="font-size: 18px"></textarea>
 <button id="send-btn">发送</button>
 <div id="container" style="margin-top: 20px; border: 1px solid #999;">
 

@@ -53,6 +53,19 @@ class Connection extends EventEmitter {
 
         this.protocol = undefined;
         this.socket = socket;
+
+        /**
+         * Possible ready states for the connection
+         * @constant {number} CONNECTING
+         * @constant {number} OPEN
+         * @constant {number} CLOSING
+         * @constant {number} CLOSED
+         */
+        this.CONNECTING = 0;
+        this.OPEN = 1;
+        this.CLOSING = 2;
+        this.CLOSED = 3;
+
         this.readyState = this.CONNECTING;
         this.buffer = new Buffer(0);
         this.frameBuffer = null; // string for text frames and InStream for binary frames
@@ -145,7 +158,7 @@ class Connection extends EventEmitter {
             this.emit('error', new Error('You can\'t send more binary frames until you finish sending the previous binary frames'))
         }
         else {
-            this.emit('error', new Error('You can\'t write to a non-open connection'))
+            this.emit('error', new Error('You can\'t write to a non-open connection'));
         }
     };
 
@@ -156,13 +169,13 @@ class Connection extends EventEmitter {
      */
     send(data, callback) {
         if (typeof data === 'string') {
-            this.sendText(data, callback)
+            this.sendText(data, callback);
         }
         else if (Buffer.isBuffer(data)) {
-            this.sendBinary(data, callback)
+            this.sendBinary(data, callback);
         }
         else {
-            throw new TypeError('data should be either a string or a Buffer instance')
+            throw new TypeError('data should be either a string or a Buffer instance');
         }
     };
 
@@ -205,7 +218,7 @@ class Connection extends EventEmitter {
      * @private
      */
     doRead() {
-        var buffer, temp;
+        let buffer, temp;
 
         // Fetches the data
         buffer = this.socket.read();
@@ -215,7 +228,7 @@ class Connection extends EventEmitter {
         }
 
         // Save to the internal buffer
-        this.buffer = Buffer.concat([this.buffer, buffer], this.buffer.length + buffer.length)
+        this.buffer = Buffer.concat([this.buffer, buffer], this.buffer.length + buffer.length);
 
         if (this.readyState === this.CONNECTING) {
             if (!this.readHandshake()) {
@@ -243,8 +256,8 @@ class Connection extends EventEmitter {
      * Create and send a handshake as a client
      * @private
      */
-    tartHandshake() {
-        var str, i, key, headers, header
+    startHandshake() {
+        let str, i, key, headers, header;
         key = new Buffer(16);
         for (i = 0; i < 16; i++) {
             key[i] = Math.floor(Math.random() * 256)
@@ -256,7 +269,7 @@ class Connection extends EventEmitter {
             Connection: 'Upgrade',
             'Sec-WebSocket-Key': this.key,
             'Sec-WebSocket-Version': '13'
-        }
+        };
 
         if (this.protocols && this.protocols.length) {
             headers['Sec-WebSocket-Protocol'] = this.protocols.join(', ')
@@ -266,7 +279,7 @@ class Connection extends EventEmitter {
             headers[header] = this.extraHeaders[header]
         }
 
-        str = this.buildRequest('GET ' + this.path + ' HTTP/1.1', headers)
+        str = this.buildRequest('GET ' + this.path + ' HTTP/1.1', headers);
         this.socket.write(str)
     }
 
@@ -277,8 +290,7 @@ class Connection extends EventEmitter {
      * @private
      */
     readHandshake() {
-        var found = false,
-            i, data;
+        let found = false, i, data;
 
         // Do the handshake and try to connect
         if (this.buffer.length > Connection.maxBufferLength) {
@@ -305,7 +317,7 @@ class Connection extends EventEmitter {
             // Wait for more data
             return false
         }
-        data = this.buffer.slice(0, i + 4).toString().split('\r\n')
+        data = this.buffer.slice(0, i + 4).toString().split('\r\n');
         if (this.server ? this.answerHandshake(data) : this.checkHandshake(data)) {
             this.buffer = this.buffer.slice(i + 4);
             this.readyState = this.OPEN;
@@ -325,7 +337,7 @@ class Connection extends EventEmitter {
      * @private
      */
     readHeaders(lines) {
-        var i, match;
+        let i, match;
 
         // Extract all headers
         // Ignore bad-formed lines and ignore the first line (HTTP header)
@@ -343,7 +355,7 @@ class Connection extends EventEmitter {
      * @private
      */
     checkHandshake(lines) {
-        var key, sha1, protocol;
+        let key, sha1, protocol;
 
         // First line
         if (lines.length < 4) {
@@ -405,7 +417,7 @@ class Connection extends EventEmitter {
      * @private
      */
     answerHandshake(lines) {
-        var path, key, sha1, headers;
+        let path, key, sha1, headers;
 
         // First line
         if (lines.length < 6) {
@@ -439,7 +451,7 @@ class Connection extends EventEmitter {
             // Parse
             this.protocols = this.headers['sec-websocket-protocol'].split(',').map(function (each) {
                 return each.trim()
-            })
+            });
 
             // Select protocol
             if (this.server._selectProtocol) {
@@ -469,7 +481,7 @@ class Connection extends EventEmitter {
      * @private
      */
     extractFrame() {
-        var fin, opcode, B, HB, mask, len, payload, start, i, hasMask;
+        let fin, opcode, B, HB, mask, len, payload, start, i, hasMask;
 
         if (this.buffer.length < 2) {
             return
@@ -628,7 +640,7 @@ class Connection extends EventEmitter {
      * @private
      */
     processCloseFrame(payload) {
-        var code, reason;
+        let code, reason;
         if (payload.length >= 2) {
             code = payload.readUInt16BE(0);
             reason = payload.slice(2).toString()
@@ -650,14 +662,14 @@ class Connection extends EventEmitter {
      * @private
      */
     buildRequest(requestLine, headers) {
-        var headerString = requestLine + '\r\n',
+        let headerString = requestLine + '\r\n',
             headerName;
 
         for (headerName in headers) {
-            headerString += headerName + ': ' + headers[headerName] + '\r\n'
+            headerString += headerName + ': ' + headers[headerName] + '\r\n';
         }
 
-        return headerString + '\r\n'
+        return headerString + '\r\n';
     };
 }
 
@@ -674,17 +686,5 @@ Connection.binaryFragmentation = 512 * 1024; // .5 MiB
  * @property {number} maxBufferLength
  */
 Connection.maxBufferLength = 2 * 1024 * 1024; // 2 MiB
-
-/**
- * Possible ready states for the connection
- * @constant {number} CONNECTING
- * @constant {number} OPEN
- * @constant {number} CLOSING
- * @constant {number} CLOSED
- */
-Connection.prototype.CONNECTING = 0;
-Connection.prototype.OPEN = 1;
-Connection.prototype.CLOSING = 2;
-Connection.prototype.CLOSED = 3;
 
 module.exports = Connection;

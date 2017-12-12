@@ -26,7 +26,6 @@ class InStream extends stream.Readable {
     /**
      * Add more data to the stream and fires "readable" event
      * @param {Buffer} data
-     * @private
      */
     addData(data) {
         this.push(data)
@@ -34,7 +33,6 @@ class InStream extends stream.Readable {
 
     /**
      * Indicates there is no more data to add to the stream
-     * @private
      */
     end() {
         this.push(null)

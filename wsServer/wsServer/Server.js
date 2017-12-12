@@ -38,7 +38,7 @@ class Server extends EventEmitter {
 
         if (typeof options === 'function') {
             callback = options;
-            options = undefined
+            options = undefined;
         }
 
         this.connections = [];
@@ -46,17 +46,17 @@ class Server extends EventEmitter {
             let conn = new Connection(socket, this, () => {
                 this.connections.push(conn);
                 conn.removeListener('error', noop);
-                this.emit('connection', conn)
+                this.emit('connection', conn);
             });
             conn.on('close', () => {
                 let pos = this.connections.indexOf(conn);
                 if (pos !== -1) {
-                    this.connections.splice(pos, 1)
+                    this.connections.splice(pos, 1);
                 }
             });
 
             // Ignore errors before the connection is established
-            conn.on('error', noop)
+            conn.on('error', noop);
         };
 
         if (secure) {
@@ -67,15 +67,15 @@ class Server extends EventEmitter {
         }
 
         this.socket.on('close', () => {
-            this.emit('close')
+            this.emit('close');
         });
 
         this.socket.on('error', err => {
-            this.emit('error', err)
+            this.emit('error', err);
         });
 
         if (callback) {
-            this.on('connection', callback)
+            this.on('connection', callback);
         }
 
         // Add protocol agreement handling
@@ -108,11 +108,11 @@ class Server extends EventEmitter {
         }
 
         if (callback) {
-            this.on('listening', callback)
+            this.on('listening', callback);
         }
 
         this.socket.listen(port, host, () => {
-            this.emit('listening')
+            this.emit('listening');
         });
 
         return this
@@ -122,7 +122,7 @@ class Server extends EventEmitter {
         if (callback) {
             this.once('close', callback)
         }
-        this.socket.close()
+        this.socket.close();
     }
 
     /**
