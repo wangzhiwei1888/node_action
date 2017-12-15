@@ -1,4 +1,4 @@
-function noop() {
+function nop() {
 
 }
 
@@ -7,7 +7,7 @@ class SSE {
         this.esId = ++SSE.eventId;
         this.lastEventId = req.headers['last-event-id'] || null;
         this._res = res;
-        this._onClose = opts.onClose || noop;
+        this._onClose = opts.onClose || nop;
         req.on("aborted", this._onClose).on("error", this._onClose).on("close", this._onClose);
         res.on("aborted", this._onClose).on("error", this._onClose).on("close", this._onClose).on("end", this._onClose);
         res.writeHead(200, {

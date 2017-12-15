@@ -2,7 +2,6 @@
  * @file Simple wrapper for stream.Writable, used for sending binary data
  */
 
-const util = require('util');
 const stream = require('stream');
 const frame = require('./frame.js');
 

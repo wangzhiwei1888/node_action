@@ -2,13 +2,12 @@
  * @file Represents a websocket server
  */
 
-const util = require('util');
 const net = require('net');
 const tls = require('tls');
 const EventEmitter = require('events');
 let Connection;
 
-function noop() {
+function nop() {
 }
 /**
  * @callback SelectProtocolCallback
@@ -45,7 +44,7 @@ class Server extends EventEmitter {
         let onConnection = socket => {
             let conn = new Connection(socket, this, () => {
                 this.connections.push(conn);
-                conn.removeListener('error', noop);
+                conn.removeListener('error', nop);
                 this.emit('connection', conn);
             });
             conn.on('close', () => {
@@ -56,7 +55,7 @@ class Server extends EventEmitter {
             });
 
             // Ignore errors before the connection is established
-            conn.on('error', noop);
+            conn.on('error', nop);
         };
 
         if (secure) {
