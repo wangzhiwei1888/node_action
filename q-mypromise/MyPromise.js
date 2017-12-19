@@ -1,4 +1,4 @@
-(function () {
+(function (root) {
 
     /*
      * 发布/订阅模式：EventEmitter的简单实现
@@ -131,7 +131,7 @@
             }
 
             // 立即resolve的Promise，原生ES6的实现：是在本轮事件循环结束时，不是在下一轮事件循环的开始时。
-            //TODO: MyPromise的实现是在下一轮事件循环的开始时，后续研究是否有何潜在的问题
+            //TODO: MyPromise的实现是在下一轮事件循环的开始时，后续研究如何实现MicroTask,
 
             this._setImmediate(() => {
                 let cb = this._state ? deferred.onFulfilled : deferred.onRejected;
@@ -152,7 +152,7 @@
         }
 
         _setImmediate(fn) {
-            //TODO 定时器到底是什么
+            //TODO 定时器到底是什么 研究定时器、process.nextTick的底层实现
             return (typeof setImmediate === 'function' && setImmediate(fn)) || setTimeout(fn, 0);
         }
 
@@ -242,7 +242,7 @@
         module.exports = MyPromise;
     }
     else {
-        window.MyPromise = MyPromise;
+        root.MyPromise = MyPromise;
     }
 
-})();
+})(this);

@@ -6,9 +6,9 @@
 
 二、模块类别：
 
-1. 内部模块  lib/internal
+1. 内部模块  lib/internal/
 
-2. 原生模块  lib/
+2. 原生模块  lib/*.js
 
    原生加载顺序：
 
@@ -50,10 +50,3 @@ node加载模块步骤：
    2) 文件定位 （文件扩展名分析， 目录和包处理等细节）
    3) 编译执行
 
-
-文件模块wrapper模拟：
-``` javascript
-    (function (exports, require, module, __filename, __dirname) {
-       // <-- FILE CONTENTS HERE -->
-    });
-```
