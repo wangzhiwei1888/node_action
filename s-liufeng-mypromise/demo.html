@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MyPromise</title>
+</head>
+<body>
+<script src="./MyPromise.js"></script>
+
+<script>
+/*(() => {
+    new MyPromise((resolve, reject) => {
+        //    throw new Error("i am sss err ...");
+        //        a++;
+        setTimeout(() => {
+            console.log('setTimeout log before resolve ');
+            resolve(10);
+        }, 1000);
+
+        setTimeout(() => {
+            console.log('setTimeout log before reject ');
+            reject("reject reason");
+        }, 100);
+    })
+    .then(v => console.log(v))
+    .catch(e => console.log(e))
+    .finally(() => console.log("finally do it , never give up!"))
+})();*/
+</script>
+
+<script>
+/*(() => {
+    setTimeout(() => {
+        console.log('three');
+    }, 0);
+    MyPromise.resolve().then(() => {
+        console.log('two');
+    });
+    for (let i = 0; i < 1000; i++) {
+        console.log('one');
+    }
+})();*/
+</script>
+
+</body>
+</html>

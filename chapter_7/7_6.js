@@ -13,12 +13,12 @@ const Q = require('q');
 // });
 
 let s = 0;
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 1; i++) {
     setTimeout(() => {
         let start = +new Date;
         let req = http.request({
-            port: 9999,
-            path: `/pages/home/index.jsx?_=${+new Date}`,
+            port: 9099,
+            path: `/pages/video/list.jsx?_=${+new Date}`,
         }, res => {
             // console.log("HTTP headers:", res.headers);
             res.on('data', data => {

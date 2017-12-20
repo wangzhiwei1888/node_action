@@ -1,0 +1,42 @@
+{
+  "_from": "s-liufeng-mypromise",
+  "_id": "s-liufeng-mypromise@1.0.0",
+  "_inBundle": false,
+  "_integrity": "sha512-F51baQ77+92P6n7c1aOQ6wV6GBwwXCJ33XR472IrdhBHSek2M+VYN1toXPiGJ0mPtz4Fwsu4+TB8vJE80l4+tg==",
+  "_location": "/s-liufeng-mypromise",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "s-liufeng-mypromise",
+    "name": "s-liufeng-mypromise",
+    "escapedName": "s-liufeng-mypromise",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "http://npm.qutoutiao.net:80/s-liufeng-mypromise/-/s-liufeng-mypromise-1.0.0.tgz",
+  "_shasum": "318abf1998991bf719e5ecf0f99ccde20f751113",
+  "_spec": "s-liufeng-mypromise",
+  "_where": "/Users/peakleo/WebstormProjects/node_action",
+  "author": {
+    "name": "liufeng"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "The realization of the promise",
+  "keywords": [
+    "promise"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "s-liufeng-mypromise",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.1.0"
+}
