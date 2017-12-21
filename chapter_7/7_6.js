@@ -13,16 +13,16 @@ const Q = require('q');
 // });
 
 let s = 0;
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 100; i++) {
     setTimeout(() => {
         let start = +new Date;
         let req = http.request({
-            port: 9099,
-            path: `/pages/video/list.jsx?_=${+new Date}`,
+            port: 8888,
+            path: `/demo`,
         }, res => {
             // console.log("HTTP headers:", res.headers);
             res.on('data', data => {
-                // console.log("Body:", data.toString());
+                 console.log("Body:", data.toString());
                 // assert.equal("Hello world. \r\n", data.toString());
                 // assert.equal(200, res.statusCode);
 

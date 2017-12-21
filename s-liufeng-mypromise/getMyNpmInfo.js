@@ -13,9 +13,7 @@ function getMyNpmInfo() {
             }
             res.setEncoding('utf8');
             let jsonData = '';
-            res.on('data', chunk => {
-                jsonData += chunk;
-            });
+            res.on('data', chunk => jsonData += chunk);
             res.on('end', () => {
                 try {
                     let parsedData = JSON.parse(jsonData);
