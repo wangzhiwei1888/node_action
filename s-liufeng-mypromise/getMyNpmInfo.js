@@ -8,7 +8,7 @@ function getMyNpmInfo() {
         http.get(URL, res => {
             let {statusCode} = res;
             if (statusCode !== 200) {
-                resolve(`请求失败，statusCode：${statusCode}`);
+                reject(`请求失败，statusCode：${statusCode}`);
                 return;
             }
             res.setEncoding('utf8');
@@ -29,7 +29,8 @@ function getMyNpmInfo() {
             reject(e.message);
         });
     });
-
 }
+
+// getMyNpmInfo().then(r => console.log(r));
 
 module.exports = getMyNpmInfo;
