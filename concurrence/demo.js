@@ -1,19 +1,3 @@
-/*const P = require("./s-liufeng-mypromise");
-
-let p = new P(resolve => setTimeout(resolve, 1000, 1000));
-
-async function f() {
-    let r;
-    console.log(1);
-    await p.then(v => {
-        r = v
-    });
-    console.log(2);
-    console.log(r);
-}
-
-console.log(f());*/
-
 
 const http = require("http");
 const eventEmitter = require("events");
