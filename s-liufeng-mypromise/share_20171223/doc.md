@@ -12,10 +12,10 @@
 4. 一旦创建就会立即执行。
 5. 如果不设置回调函数，内部抛出的错误，不会反应到外部
 
-### Promise 本例实现了ES6标准下的API & finally
+### Promise 本例中实现了ES6标准下的API & finally
 1. Promise.prototype.then
 2. Promise.prototype.catch
-3. Promise.prototype.finally （非标准）
+3. Promise.prototype.finally （非ES6标准）
 4. Promise.all
 5. Promise.race
 6. Promise.resolve
