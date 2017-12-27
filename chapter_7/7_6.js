@@ -13,7 +13,7 @@ const Q = require('q');
 // });
 
 let s = 0;
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 300; i++) {
     setTimeout(() => {
         let start = +new Date;
         let req = http.request({
