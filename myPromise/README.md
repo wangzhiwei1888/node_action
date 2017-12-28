@@ -18,15 +18,16 @@
 1. 基本用法：
     1) 创建阶段：构造函数、构造函数的两个参数
     2) 生成实例：then catch finally
-
+    3) 静态方法：all race  reject resolve
 2.
 
 
 ### Attention
-1. then方法中 永远 return 或 throw
-2. promise链中可能出现错误，将你的链条以catch终结
-3. 永远传递函数给 then 方法
-4. 不要把 promise 写成嵌套
+1. 不要把promise写成嵌套
+2. 将你的链条以catch终结
+3. then方法中永远return 或 throw
+4. 不给then函数传第二个参数
+5. 永远传递函数给then方法
 
 ### Think
 1. ./think/1.js
