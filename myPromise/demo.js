@@ -49,3 +49,7 @@ const MyPromise = require("./MyPromise.js");
 // let start = +new Date;
 // MyPromise.all([p1, p2, p3, 1, 2, 4])
 // .then(v => console.log(+new Date - start + 'ms later:\n', v));
+
+MyPromise.resolve('foo').then(MyPromise.resolve('bar')).then(function (result) {
+    console.log(result);
+});
