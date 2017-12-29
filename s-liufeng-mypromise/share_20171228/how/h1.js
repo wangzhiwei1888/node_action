@@ -1,7 +1,5 @@
 let p = new Promise((res, rej) => {
-    setTimeout(() => {
-        res(1)
-    }, 3e3)
+    setTimeout(res, 3e3, 1)
 })
     .then(r => r + 1)
     .then(r => r + 2)

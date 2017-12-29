@@ -27,7 +27,7 @@
 2. 将你的链条以catch终结
 3. then方法中永远return 或 throw
 4. 不给then函数传第二个参数
-5. 永远传递函数给then方法
+5. 永远传递函数给then函数
 
 ### Think
 1. ./think/1.js
