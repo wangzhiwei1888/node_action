@@ -1,11 +1,4 @@
-// module.exports = require('./charStat.js');
-
 const charStat = require('./charStat.js');
+const charStat2 = require('./charStat2.js');
 
-console.time('charStat');
-charStat().then(v => {
-    console.timeEnd('charStat');
-    console.log(v);
-});
-
-module.exports = charStat;
+module.exports = {charStat: charStat, charStat2: charStat2};
