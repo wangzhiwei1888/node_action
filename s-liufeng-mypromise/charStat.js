@@ -8,7 +8,7 @@ function charStat(url) {
                 result[chars[i]] = 0
             }
             res.on('data', chunk => {
-                let resText = chunk.toString();
+                let resText = chunk.toString().replace(/[^a-z]/ig,'');
                 for (let i = 0, l = resText.length; i < l; i++) {
                     let code = resText[i].charCodeAt();
                     if (code >= 97 && code <= 122) {

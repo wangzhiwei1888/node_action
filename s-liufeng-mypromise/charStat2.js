@@ -4,6 +4,7 @@ for (let i = 0, l = chars.length; i < l; i++) {
 }
 
 function charStat2(txt) {
+    txt = txt.replace(/[^a-z]/ig,'');
     return new Promise(resolve => {
         for (let i = 0, l = txt.length; i < l; i++) {
             let code = txt[i].charCodeAt();
