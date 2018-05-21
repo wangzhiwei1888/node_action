@@ -135,7 +135,7 @@
 
             this._setImmediate(() => {
                 let cb = this._state ? deferred.onFulfilled : deferred.onRejected;
-                if (cb === null) {
+                if (cb === null ) { // typeof cb !== "function"
                     (this._state ? deferred.resolve : deferred.reject)(this._value);
                     return;
                 }
