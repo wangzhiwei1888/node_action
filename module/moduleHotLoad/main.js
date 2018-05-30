@@ -6,7 +6,7 @@ const PORT = 8900;
 let hotModule = require("./hotModule.js");
 
 let httpServer = http.createServer((req, res) => {
-    res.end(hotModule.ss);
+    res.end(hotModule.greet());
 });
 
 httpServer.listen(PORT, () => {

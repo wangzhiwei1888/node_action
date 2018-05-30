@@ -1,3 +1,6 @@
 module.exports = {
-    ss: "hello"
+    ss: "wow",
+    greet: function () {
+        return `${this.ss} , I changed without restart server`
+    }
 };
